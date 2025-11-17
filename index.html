@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rentify - For Landlords</title>
+  <!-- Google Fonts (optional) - added Pacifico for Rentify branding -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Permanent+Marker&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Minimal dark mode toggle button, top right outside the card -->
+  <button id="darkModeToggle" class="dark-mode-btn outside" title="Toggle dark mode">🌙</button>
+  <!-- Rentify branding outside the card -->
+  <h1 class="rentify-title">Rentify</h1>
+  <!-- Floating app card: header, nav, and main live inside this centered panel -->
+  <div class="app-card">
+    <header>
+      <h2>Landlord Edition</h2>
+    </header>
+
+    <nav>
+      <button onclick="showSection('dashboard')">Dashboard</button>
+      <button onclick="showSection('tenants')">Tenant Management</button>
+      <button onclick="showSection('payments')">Payment Tracking</button>
+    </nav>
+
+    <main>
+      <!-- Dashboard -->
+      <section id="dashboard" class="active">
+        <h2>Dashboard</h2>
+        <div class="cards">
+          <div class="card">Total Tenants: <span id="totalTenants" class="metric-value">0</span></div>
+          <div class="card">Paid: <span id="paidTenants" class="metric-value">0</span></div>
+          <div class="card">Past Due: <span id="pastDueCount" class="metric-value">0</span></div>
+        </div>
+      </section>
+
+      <!-- Tenant Management -->
+      <section id="tenants">
+        <h2>Tenant Management</h2>
+        <form id="tenantForm">
+          <input type="text" id="tenantName" placeholder="Tenant Name" required>
+          <input type="text" id="tenantRoom" placeholder="Room/Unit" required>
+          <input type="number" id="tenantRent" placeholder="Rent Amount" required>
+          <input type="date" id="tenantDueDate" placeholder="Due Date" required>
+          <button type="submit">Add Tenant</button>
+        </form>
+        <div class="table-scroll">
+        <table id="tenantTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Room</th>
+              <th>Rent</th>
+              <th>Due Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        </div>
+      </section>
+
+      <!-- Payment Tracking -->
+      <section id="payments">
+        <h2>Payment Tracking</h2>
+        <div class="table-scroll">
+        <table id="paymentTable">
+          <thead>
+            <tr>
+              <th>Tenant</th>
+              <th>Room</th>
+              <th>Rent</th>
+              <th>Due Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Delete confirmation modal -->
+  <div id="deleteModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+      <h3 id="deleteModalTitle">Confirm Delete</h3>
+      <p id="deleteModalMessage">Are you sure you want to delete this tenant? This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="modal-btn cancel" onclick="cancelDelete()">Cancel</button>
+        <button class="modal-btn confirm" onclick="confirmDelete()">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
